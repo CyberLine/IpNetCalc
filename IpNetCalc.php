@@ -36,6 +36,7 @@ class IPNetCalc
     asort($v);
     $c[] = $v[0];
     $c[] = $v[(count($v) - 1)];
+    $t = '';
 
     foreach ($c as $k => $ip)
     {

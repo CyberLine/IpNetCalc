@@ -1,5 +1,7 @@
 # IpNetCalc
 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/CyberLine/IpNetCalc/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/CyberLine/IpNetCalc/?branch=master)
+
 Compute the common mask from multiple IP addresses
 
 ## Example

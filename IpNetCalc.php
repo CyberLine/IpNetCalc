@@ -8,7 +8,7 @@ class IPNetCalc
    * @param array $ips
    * @return string
    */
-  public function calcNetSum($ips = array())
+  public function calcNetSum(array $ips = array())
   {
     $v = $c = $n = $s = array();
     $i4 = $i6 = false;
@@ -89,7 +89,7 @@ class IPNetCalc
 
     /**
      * @param $ip
-     * @param $t
+     * @param integer $t
      *
      * @return array
      */

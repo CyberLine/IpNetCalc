@@ -4,11 +4,9 @@
  */
 class IPNetCalc
 {
-
   /**
    * @param array $ips
-   *
-   * @return bool|string
+   * @return string
    */
   public function calcNetSum($ips = array())
   {
@@ -41,7 +39,7 @@ class IPNetCalc
 
     foreach ($c as $k => $ip)
     {
-      $s[$k] = implode(self::bitCalcIP($ip, $m1));
+      $s[$k] = implode('', self::bitCalcIP($ip, $m1));
     }
 
     if ($s[0] === $s[1])
@@ -88,12 +86,12 @@ class IPNetCalc
     return $n . '/' . $i;
   }
 
-  /**
-   * @param $ip
-   * @param $t
-   *
-   * @return array
-   */
+    /**
+     * @param $ip
+     * @param $t
+     *
+     * @return array
+     */
   private static function bitCalcIP($ip, $t)
   {
     $r = $n = array();
@@ -122,13 +120,13 @@ class IPNetCalc
     return $r;
   }
 
-  /**
-   * @param $b
-   * @param $p
-   * @param string $f
-   *
-   * @return string
-   */
+    /**
+     * @param $b
+     * @param $p
+     * @param string $f
+     *
+     * @return string
+     */
   private static function formatBitMask($b, $p, $f = "html")
   {
     if ("html" == $f)

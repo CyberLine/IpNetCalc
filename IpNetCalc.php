@@ -120,23 +120,4 @@ class IPNetCalc
 
     return $r;
   }
-
-    /**
-     * @param $b
-     * @param $p
-     * @param string $f
-     *
-     * @return string
-     */
-  private static function formatBitMask($b, $p, $f = "html")
-  {
-    if ("html" == $f)
-    {
-      return substr($b, 0, $p) . '<span style="color:red">' . substr($b, $p) . '</span>';
-    }
-    else
-    {
-      return substr($b, 0, $p) . ' ' . substr($b, $p);
-    }
-  }
 }

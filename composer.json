@@ -1,7 +1,7 @@
 {
     "name": "cyberline/ip-net-calc",
     "description": "Compute the common mask from multiple IP addresses",
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "homepage": "https://github.com/CyberLine/IpNetCalc",
     "license": "proprietary",
     "authors": [
@@ -12,5 +12,8 @@
     ],
     "require": {
         "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-4": {"IpNetCalc\\": "src/"}
     }
 }

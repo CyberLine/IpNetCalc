@@ -4,6 +4,10 @@ namespace IpNetCalc;
 
 /**
  * Class IPNetCalc
+ *
+ * Compute the common mask from multiple IP addresses
+ *
+ * @author Alexander Over <cyberline@php.net>
  */
 class IPNetCalc
 {
@@ -13,7 +17,7 @@ class IPNetCalc
      */
     public function calcNetSum(array $ips = array())
     {
-        $v = $c = $n = $s = array();
+        $v = $c = $n = $s = [];
         $i4 = $i6 = false;
 
         foreach ($ips as $ip) {
@@ -36,7 +40,7 @@ class IPNetCalc
         $t = '';
 
         foreach ($c as $k => $ip) {
-            $s[$k] = implode('', self::bitCalcIP($ip, $m1));
+            $s[$k] = implode('', $this->bitCalcIP($ip, $m1));
         }
 
         if ($s[0] === $s[1]) {
@@ -73,17 +77,17 @@ class IPNetCalc
     }
 
     /**
-     * @param $ip
+     * @param string $ip
      * @param integer $t
      *
      * @return array
      */
-    private static function bitCalcIP($ip, $t)
+    private function bitCalcIP($ip, $t)
     {
-        $r = array();
+        $r = [];
 
         if (6 == $t) {
-            $e = self::handleV6($ip);
+            $e = $this->handleV6($ip);
         } else {
             $e = explode('.', $ip);
         }
@@ -96,12 +100,12 @@ class IPNetCalc
     }
 
     /**
-     * @param $ip
+     * @param string $ip
      * @return array
      */
-    private static function handleV6($ip)
+    private function handleV6($ip)
     {
-        $n = array();
+        $n = [];
         $u = unpack('H*', inet_pton($ip));
         $e = str_split($u[1], 4);
         for ($i = 0; $i < 8; $i++) {

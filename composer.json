@@ -1,0 +1,12 @@
+{
+    "name": "CyberLine/IpNetCalc",
+    "description": "Compute the common mask from multiple IP addresses",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Alexander Over",
+            "email": "cyberline@php.net"
+        }
+    ]
+}

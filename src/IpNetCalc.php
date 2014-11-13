@@ -3,13 +3,13 @@
 namespace IpNetCalc;
 
 /**
- * Class IPNetCalc
+ * Class IpNetCalc
  *
  * Compute the common mask from multiple IP addresses
  *
  * @author Alexander Over <cyberline@php.net>
  */
-class IPNetCalc
+class IpNetCalc
 {
     /**
      * @param array $ips

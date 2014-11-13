@@ -11,7 +11,7 @@ Compute the common mask from multiple IP addresses
 	require_once 'IpNetCalc.php';
 
 	// returns: 192.168.0.0/22
-	$ip = new IPNetCalc();
+	$ip = new IpNetCalc\IpNetCalc();
 	print $ip->calcNetSum(array('192.168.0.1', '192.168.2.40'));
 
 	// returns: 2000::/4

@@ -1,5 +1,6 @@
 {
     "name": "cyberline/ip-net-calc",
+    "type": "library",
     "description": "Compute the common mask from multiple IP addresses",
     "minimum-stability": "dev",
     "homepage": "https://github.com/CyberLine/IpNetCalc",

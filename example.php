@@ -3,7 +3,7 @@ require_once 'src/IpNetCalc.php';
 
 try {
     // returns: 192.168.0.0/22
-    $ip = new IPNetCalc\IPNetCalc();
+    $ip = new IpNetCalc\IpNetCalc();
     print $ip->calcNetSum(array('192.168.0.1', '192.168.2.40'));
 
     // returns: 2000::/4

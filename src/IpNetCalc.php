@@ -21,10 +21,10 @@ class IpNetCalc
         $i4 = $i6 = false;
 
         foreach ($ips as $ip) {
-            if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) and !$i6) {
+            if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) && !$i6) {
                 $i4 = true;
                 $v[] = $ip;
-            } elseif (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) and !$i4) {
+            } elseif (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) && !$i4) {
                 $i6 = true;
                 $v[] = $ip;
             } else {
@@ -48,7 +48,8 @@ class IpNetCalc
             $i = $m0;
         } else {
             $o = '';
-            for ($i = 0; $i < strlen($s[0]); $i++) {
+            $len = strlen($s[0]);
+            for ($i = 0; $i < $len; $i++) {
                 if (substr($s[0], $i, 1) == substr($s[1], $i, 1)) {
                     $o .= substr($s[0], $i, 1);
                 } else {
@@ -66,7 +67,8 @@ class IpNetCalc
             }
             $n = implode('.', $n);
         } else {
-            for ($j = 0; $j < count($q); $j += 2) {
+            $len = count($q);
+            for ($j = 0; $j < $len; $j += 2) {
                 $n[$j] = dechex(bindec($q[$j])) .
                     str_pad(dechex(bindec($q[$j + 1])), 2, 0, STR_PAD_LEFT);
             }

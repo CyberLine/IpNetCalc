@@ -3,7 +3,11 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/CyberLine/IpNetCalc/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/CyberLine/IpNetCalc/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/CyberLine/IpNetCalc/badges/build.png?b=master)](https://scrutinizer-ci.com/g/CyberLine/IpNetCalc/build-status/master)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/fcf93f3d-d66c-4a82-b7bf-dd317ee9b15c/mini.png)](https://insight.sensiolabs.com/projects/fcf93f3d-d66c-4a82-b7bf-dd317ee9b15c)
-    
+[![Latest Stable Version](https://poser.pugx.org/cyberline/ip-net-calc/v/stable.svg)](https://packagist.org/packages/cyberline/ip-net-calc)
+[![Total Downloads](https://poser.pugx.org/cyberline/ip-net-calc/downloads.svg)](https://packagist.org/packages/cyberline/ip-net-calc)
+[![Latest Unstable Version](https://poser.pugx.org/cyberline/ip-net-calc/v/unstable.svg)](https://packagist.org/packages/cyberline/ip-net-calc)
+[![License](https://poser.pugx.org/cyberline/ip-net-calc/license.svg)](https://packagist.org/packages/cyberline/ip-net-calc)
+
 Compute the common mask from multiple IP addresses
 
 ## Example

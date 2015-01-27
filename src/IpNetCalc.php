@@ -15,45 +15,54 @@ class IpNetCalc
      * @param array $ips
      * @return string
      */
-    public function calcNetSum(array $ips = array())
+    public function calcNetSum(array $ips)
     {
-        $v = $c = $n = $s = [];
-        $i4 = $i6 = false;
+        if (count($ips) < 2) {
+            throw new \InvalidArgumentException('too few arguments');
+        }
+
+        $validated = $n = $s = [];
+        $isV4 = $isV6 = false;
 
         foreach ($ips as $ip) {
-            if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) && !$i6) {
-                $i4 = true;
-                $v[] = $ip;
-            } elseif (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) && !$i4) {
-                $i6 = true;
-                $v[] = $ip;
+            if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4) && !$isV6) {
+                $isV4 = true;
+                $validated[] = $ip;
+            } elseif (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) && !$isV4) {
+                $isV6 = true;
+                $validated[] = $ip;
             } else {
-                return false;
+                throw new \InvalidArgumentException('mixing of IPs not allowed');
             }
         }
 
-        $m0 = (($i4) ? 32 : 128);
-        $m1 = (($i4) ? 4 : 6);
-        asort($v);
-        $c[] = $v[0];
-        $c[] = $v[(count($v) - 1)];
-        $t = '';
+        $mask = (($isV4) ? 32 : 128);
+        $ipType = (($isV4) ? 4 : 6);
 
-        foreach ($c as $k => $ip) {
-            $s[$k] = implode('', $this->bitCalcIP($ip, $m1));
+        asort($validated);
+
+        // we need only smalest and biggest ip
+        $compare = [
+            array_shift($validated),
+            array_pop($validated)
+        ];
+
+        foreach ($compare as $key => $ip) {
+            $s[$key] = implode('', $this->bitCalcIP($ip, $ipType));
         }
+
+        $t = '';
 
         if ($s[0] === $s[1]) {
             $t = $s[0];
-            $i = $m0;
+            $i = $mask;
         } else {
             $o = '';
-            $len = strlen($s[0]);
-            for ($i = 0; $i < $len; $i++) {
+            for ($i = 0, $len = strlen($s[0]); $i < $len; $i++) {
                 if (substr($s[0], $i, 1) == substr($s[1], $i, 1)) {
                     $o .= substr($s[0], $i, 1);
                 } else {
-                    $t = str_pad($o, $m0, 0, STR_PAD_RIGHT);
+                    $t = str_pad($o, $mask, 0, STR_PAD_RIGHT);
                     break;
                 }
             }
@@ -61,14 +70,13 @@ class IpNetCalc
 
         $q = str_split($t, 8);
 
-        if ($i4) {
+        if ($isV4) {
             foreach ($q as $b) {
                 $n[] = bindec($b);
             }
             $n = implode('.', $n);
         } else {
-            $len = count($q);
-            for ($j = 0; $j < $len; $j += 2) {
+            for ($j = 0, $len = count($q); $j < $len; $j += 2) {
                 $n[$j] = dechex(bindec($q[$j])) .
                     str_pad(dechex(bindec($q[$j + 1])), 2, 0, STR_PAD_LEFT);
             }
@@ -80,15 +88,15 @@ class IpNetCalc
 
     /**
      * @param string $ip
-     * @param integer $t
+     * @param integer $ipType
      *
      * @return array
      */
-    private function bitCalcIP($ip, $t)
+    private function bitCalcIP($ip, $ipType)
     {
         $r = [];
 
-        if (6 == $t) {
+        if (6 == $ipType) {
             $e = $this->handleV6($ip);
         } else {
             $e = explode('.', $ip);
@@ -108,8 +116,8 @@ class IpNetCalc
     private function handleV6($ip)
     {
         $n = [];
-        $u = unpack('H*', inet_pton($ip));
-        $e = str_split($u[1], 4);
+        $unpack = unpack('H*', inet_pton($ip));
+        $e = str_split($unpack[1], 4);
         for ($i = 0; $i < 8; $i++) {
             $n[] = hexdec(substr($e[$i], 0, 2));
             $n[] = hexdec(substr($e[$i], 2, 2));

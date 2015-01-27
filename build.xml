@@ -3,10 +3,10 @@
 <project name="IpNetCalc" default="build">
 
     <target name="build"
-            depends="prepare,composer,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd"/>
+            depends="prepare,composerget,composer,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd"/>
 
     <target name="build-parallel"
-            depends="prepare,composer,lint,tools-parallel"/>
+            depends="prepare,composerget,composer,lint,tools-parallel"/>
 
     <target name="tools-parallel" description="Run tools in parallel">
         <parallel threadCount="2">
@@ -31,8 +31,16 @@
         <mkdir dir="${basedir}/build/pdepend"/>
     </target>
 
+    <target name="composerget" description="Composer update dependencies">
+        <exec executable="/bin/bash">
+            <arg value="-c" />
+            <arg value="curl -s https://getcomposer.org/installer | php" />
+        </exec>
+    </target>
+
     <target name="composer" depends="clean" description="Install vendors">
-        <exec executable="./composer.phar" failonerror="true">
+        <exec executable="php" failonerror="true">
+            <arg value='composer.phar' />
             <arg value='update' />
             <arg value="--optimize-autoloader" />
         </exec>

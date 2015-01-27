@@ -3,10 +3,10 @@
 <project name="IpNetCalc" default="build">
 
     <target name="build"
-            depends="prepare,composerget,composer,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpcpd"/>
+            depends="prepare,composerget,composer,lint,phploc,pdepend,phpmd-ci,phpcs-ci,phpunit,phpcpd"/>
 
     <target name="build-parallel"
-            depends="prepare,composerget,composer,lint,tools-parallel"/>
+            depends="prepare,composerget,composer,lint,phpunit,tools-parallel"/>
 
     <target name="tools-parallel" description="Run tools in parallel">
         <parallel threadCount="2">
@@ -24,11 +24,13 @@
     <target name="clean" description="Cleanup build artifacts">
         <delete dir="${basedir}/build/logs"/>
         <delete dir="${basedir}/build/pdepend"/>
+        <delete dir="${basedir}/build/coverage"/>
     </target>
 
     <target name="prepare" depends="clean" description="Prepare for build">
         <mkdir dir="${basedir}/build/logs"/>
         <mkdir dir="${basedir}/build/pdepend"/>
+        <mkdir dir="${basedir}/build/coverage"/>
     </target>
 
     <target name="composerget" description="Composer update dependencies">
@@ -111,6 +113,11 @@
             <arg value="--standard=PSR2" />
             <arg value="--extensions=php" />
             <arg path="${basedir}/src" />
+        </exec>
+    </target>
+
+    <target name="phpunit" description="Run unit tests with PHPUnit">
+        <exec executable="phpunit" failonerror="true">
         </exec>
     </target>
 

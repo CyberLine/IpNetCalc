@@ -13,4 +13,10 @@
   <php>
     <const name="PHPUNIT_TESTSUITE" value="true"/>
   </php>
+
+  <filter>
+    <whitelist processUncoveredFilesFromWhitelist="true">
+      <file>src/IpNetCalc.php</file>
+    </whitelist>
+  </filter>
 </phpunit>

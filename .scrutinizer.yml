@@ -1,6 +1,15 @@
 before_commands:
     - "composer install --prefer-source"
 
+build:
+    tests:
+        override:
+            -
+                command: 'phpunit --coverage-clover=clover.xml'
+                coverage:
+                    file: 'clover.xml'
+                    format: 'clover'
+
 tools:
     external_code_coverage:
         timeout: 600
